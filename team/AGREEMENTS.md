@@ -1,4 +1,4 @@
-#Agreements
+# Agreements
 
 - Planned absences should be reported as soon as possible.
 - We should attend meetings we scheduled together on time with the exception of unforeseen circumstances.
