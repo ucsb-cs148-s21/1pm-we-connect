@@ -15,3 +15,4 @@ Surendra Ghentiyala: Did nothing since last meeting
 # Other meeting details
 - Came up with user journey
 - Have MVP "hello world" React app
+- Came to conclusion that for MVP we want ability to post project details and ability to browse posted project details
