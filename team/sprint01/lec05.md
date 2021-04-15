@@ -17,3 +17,15 @@ Kenneth Deng: Did nothing since last meeting
 Surendra Ghentiyala: Did nothing since last meeting
 
 # Other meeting details
+- We are using Material.UI to help with design components.
+
+## What everyone is specializing in
+- Alon: Front End
+- Kenneth: Back End
+- Kevin: Back End
+- Surendra: Front End
+- Thanawat: Both
+
+## What we want in MVP
+- Post Events
+- See Events
