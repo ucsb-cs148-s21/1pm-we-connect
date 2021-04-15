@@ -8,4 +8,7 @@ def create_app():
         @app.route("/")
         def index():
             return render_template("index.html")
+        @app.route("/app-name")
+        def app_name():
+            return "We Connect App"
         return app
