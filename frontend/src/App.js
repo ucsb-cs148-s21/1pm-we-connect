@@ -1,17 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Home from './pages/Home';
+import CreatePost from './pages/CreatePost';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h>
-      Welcome to the We Connect App.
-        </h>
-      </header>
-    </div>
+    <Router>
+      <NavBar />
+      <Switch>
+        <Route path="/" exact component={Home}/>
+        <Route path="/createPost" exact component={CreatePost}/>
+      </Switch>
+    </Router>
   );
 }
 
 export default App;
+    
+
