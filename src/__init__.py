@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 from flask import Flask, render_template,url_for
-# from flask_sqlalchemy import SQLAlchemy
-#
+#from flask_sqlalchemy import SQLAlchemy
 
-# Temporary array before implementing database
-storage = ["Item 1", "Item 2", "Item 3"]
+#db = SQLAlchemy()
+# Temporary dictionary of dictionaries
+storage = {
+    "1": {"name": "Author 1", "text":"Make a Flask app"},
+    "2": {"name": "Author 2", "text":"Stop being depressed"}, 
+    "3": {"name": "Author 3", "text":"Eat"}
+    }
+
 def create_app():
     # app = Flask(__name__, static_folder="./build/static", template_folder="./build") # For React to be added later
     app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
@@ -18,26 +23,21 @@ def create_app():
             return ", ".join(storage) 
 
         #Get, Post, Update, or Delete
-        @app.route("/projects/edit", methods=["GET", "POST", "UPDATE", "DELETE"])
-        def projectCreate():
+        @app.route("/projects/<id>/<value>", methods=["GET", "POST", "UPDATE", "DELETE"])
+        def projectCreate(id, value):
             if(request.method == "GET"):
-                index = request.form["index"]
-                return storage[int(index)]
+                return storage[id]
 
             elif(request.method == "POST"):
-                value = request.form["value"]
-                storage.append(value)
+                storage[id] = {"name":id, "text":value}
                 return value
 
             elif(request.method == "UPDATE"):
-                index = request.form["index"]
-                value = request.form["value"]
-                storage[int(index)] = value
-                return storage[int(index)]
+                storage[id] = {"name":id, "text":value}
+                return storage[id]
 
             elif(request.method == "DELETE"):
-                index = request.form["index"]
-                storage.pop(int(index))
-                return index
+                storage.pop(id)
+                return id
 
         return app
