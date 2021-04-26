@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Nav,
   NavLink,
-  Bars,
   NavMenu,
   NavBtn,
   NavBtnLink
@@ -10,27 +9,23 @@ import {
 
 const Navbar = () => {
   return (
-    <>
-      <Nav>
-        <NavLink to='/'>
-            WeConnect
+    <Nav>
+      <NavLink to='/'>
+        WeConnect
         </NavLink>
-        <Bars />
-        <NavMenu>
-          <NavLink to='/createPost' activeStyle>
-            Create Post
+      <NavMenu>
+        <NavLink to='/createPost' >
+          Create Post
           </NavLink>
-          <NavLink to='/sign-up' activeStyle>
-            Sign Up
+        <NavLink to='/sign-up'>
+          Sign Up
           </NavLink>
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
-        </NavMenu>
-        <NavBtn>
-          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
-        </NavBtn>
-      </Nav>
-    </>
+      <NavBtn>
+        <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+      </NavBtn>
+      </NavMenu>
+
+    </Nav>
   );
 };
 
