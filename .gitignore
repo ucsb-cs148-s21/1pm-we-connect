@@ -102,6 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
-# Other stuff
-/src/build
+# Other files to ignore
 __pycache__
+build
+.DS_Store
