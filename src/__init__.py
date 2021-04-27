@@ -20,7 +20,7 @@ def create_app():
         
         @app.route("/projects")
         def projects():
-            return ", ".join(storage) 
+            return str(storage)
 
         #Get, Post, Update, or Delete
         @app.route("/projects/<id>/<value>", methods=["GET", "POST", "UPDATE", "DELETE"])
