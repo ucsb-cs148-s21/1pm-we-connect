@@ -7,25 +7,8 @@ import os.path
 from os import path
 import random
 
-def create_app():
-    # app = Flask(__name__, static_folder="./build/static", template_folder="./build") # For React to be added later
-    app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
-
-    #database configuration
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-    db = SQLAlchemy(app)
-
-    #Removed for database testing
-    """ 
-    # Temporary dictionary of dictionaries
-    storage = {
-        "1": {"author": "Author 1", "projectName":"Make a Flask app", "contactInfo": "111-111-1111", "projectDescription": "hello"},
-        "2": {"author": "Author 2", "projectName":"Stop being depressed", "contactInfo": "111-111-1111", "projectDescription": "hello"},
-        "3": {"author": "Author 3", "projectName":"Eat", "contactInfo": "111-111-1111", "projectDescription": "hello"}
-        }
-    """
-
-    class formModel(db.Model):
+db = SQLAlchemy()
+class formModel(db.Model):
         __tablename__ = 'form'
 
         id = db.Column(db.Integer, primary_key = True)
@@ -42,6 +25,24 @@ def create_app():
                 "projectDescription": projectDescription
             }
             return item
+
+def create_app():
+    # app = Flask(__name__, static_folder="./build/static", template_folder="./build") # For React to be added later
+    app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
+
+    #database configuration
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+    db.init_app(app)
+    #Removed for database testing
+    """ 
+    # Temporary dictionary of dictionaries
+    storage = {
+        "1": {"author": "Author 1", "projectName":"Make a Flask app", "contactInfo": "111-111-1111", "projectDescription": "hello"},
+        "2": {"author": "Author 2", "projectName":"Stop being depressed", "contactInfo": "111-111-1111", "projectDescription": "hello"},
+        "3": {"author": "Author 3", "projectName":"Eat", "contactInfo": "111-111-1111", "projectDescription": "hello"}
+        }
+    """
+
 
     with app.app_context():
         @app.route("/")
@@ -94,18 +95,18 @@ def create_app():
                 return "SUCCESS"
 
         # Get, Put, or Delete
-        @app.route("/projects/<int:form_id>", methods=["GET", "PUT", "DELETE"])
-        def projectCreate(form_id):
-            if(request.method == "GET"):
-                result = formModel.query.get(id=form_id)
-                return result
+        # @app.route("/projects/<int:form_id>", methods=["GET", "PUT", "DELETE"])
+        # def projectCreate(form_id):
+            # if(request.method == "GET"):
+            #     result = formModel.query.get(id=form_id)
+                # return result
 
             # elif(request.method == "PUT"):
             #     storage[id] = {"name": id, "text": value}
             #     return storage[id]
 
-            elif(request.method == "DELETE"):
-                storage.pop(id)
-                return id
-
+            # elif(request.method == "DELETE"):
+            #     storage.pop(id)
+            #     return id
+        db.create_all()
         return app

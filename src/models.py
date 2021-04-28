@@ -1,5 +1,5 @@
 """Data models."""
-from __init__.py import db
+from . import db
 
 class formModel(db.Model):
     __tablename__ = 'form'
