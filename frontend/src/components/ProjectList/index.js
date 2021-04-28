@@ -15,7 +15,7 @@ const Idea = ({ author, projectName, contactInfo, projectDescription }) => {
                 <Typography variant="h4" component="h1">{projectName}</Typography>
                 <Typography variant="p" component="p">By: {author}</Typography>
                 <Typography variant="p" component="p">Contact info: {contactInfo}</Typography>
-                <Typography variant="p" component="p">Contact info: {projectDescription}</Typography>
+                <Typography variant="p" component="p">Project Description: {projectDescription}</Typography>
             </CardContent>
         </Card>
     )

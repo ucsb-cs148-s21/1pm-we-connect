@@ -4,6 +4,28 @@ const PostForm = () => {
     const [text, setText] = React.useState('')
     const [topic, setTopic] = React.useState('cs')
 
+    const submitForm = (e) => {
+    	e.preventDefault();
+
+    	//from reactDocs
+    	fetch('/projects/100/2', {
+  			method: 'POST',
+  			headers: {
+    			Accept: 'application/json',
+    			'Content-Type': 'application/json'
+  			},
+  			body: JSON.stringify({
+    			author: name,
+    			projectName: "tbd",
+    			contactInfo: "111-111-1111",
+    			projectDescription: text
+
+  			})
+		});
+
+		alert("Form submitted")
+    }
+
     return (
         <form style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
             <div>
@@ -22,7 +44,7 @@ const PostForm = () => {
                     <option value="film">Film</option>
                 </select>
             </div>
-            <button onClick={() => alert(`${name} \n${text} \n${topic}`)} type="submit">Submit</button>
+            <button onClick={submitForm} type="submit">Submit</button>
         </form>
     )
 }
