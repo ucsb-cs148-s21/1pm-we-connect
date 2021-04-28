@@ -1,24 +1,26 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import ProjectList from "../components/ProjectList"
 
 const Home = () => {
-	const [data, setData] = useState([])
+    const [data, setData] = useState([])
 
 
-	useEffect(() => {
-		getData();
-	}, []);
+    useEffect(() => {
+        getData();
+    }, []);
 
 
-  	const getData = async () =>{
-  		fetch('https://jsonplaceholder.typicode.com/todos/1')
-  		.then(response => response.json())
-  		.then(json => setData(json))
-  	}
+    const getData = async () => {
+        fetch('/projects')
+            .then(response => response.json())
+            .then(json => setData(Object.values(json)))
+            .catch((reason) => console.log(reason))
+    }
 
     return (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh'}}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
             <h1>Home</h1>
-            <h1>{data.title}</h1>
+            <ProjectList list={data}/>
         </div>
     )
 }

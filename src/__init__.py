@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template,url_for
+from flask import Flask, request, render_template,url_for,Response
 #from flask_sqlalchemy import SQLAlchemy
 
 #db = SQLAlchemy()
 # Temporary dictionary of dictionaries
 storage = {
-    "1": {"name": "Author 1", "text":"Make a Flask app"},
-    "2": {"name": "Author 2", "text":"Stop being depressed"}, 
-    "3": {"name": "Author 3", "text":"Eat"}
+    "1": {"author": "Author 1", "projectName":"Make a Flask app", "contactInfo": "111-111-1111", "projectDescription": "hello"},
+    "2": {"author": "Author 2", "projectName":"Stop being depressed", "contactInfo": "111-111-1111", "projectDescription": "hello"},
+    "3": {"author": "Author 3", "projectName":"Eat", "contactInfo": "111-111-1111", "projectDescription": "hello"}
     }
 
 def create_app():
@@ -20,7 +20,7 @@ def create_app():
         
         @app.route("/projects")
         def projects():
-            return str(storage)
+            return storage
 
         #Get, Post, Update, or Delete
         @app.route("/projects/<id>/<value>", methods=["GET", "POST", "UPDATE", "DELETE"])
