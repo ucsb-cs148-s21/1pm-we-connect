@@ -29,7 +29,10 @@ def create_app():
                 return storage[id]
 
             elif(request.method == "POST"):
-                storage[id] = {"name":id, "text":value}
+                #storage[id] = {"name":id, "text":value}
+
+                print(request.json)
+                storage[id] = request.json
                 return value
 
             elif(request.method == "UPDATE"):
