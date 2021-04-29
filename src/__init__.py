@@ -25,16 +25,18 @@ def create_app():
                 return storage
 
             elif(request.method == "POST"):
-                author = request.form["author"]
-                projectName = request.form["projectName"]
-                contactInfo = request.form["contactInfo"]
-                projectDescription = request.form["projectDescription"]
-                item = {
-                    "author": author,
-                    "projectName": projectName,
-                    "contactInfo": contactInfo,
-                    "projectDescription": projectDescription
-                }
+                # author = request.form["author"]
+                # projectName = request.form["projectName"]
+                # contactInfo = request.form["contactInfo"]
+                # projectDescription = request.form["projectDescription"]
+                # item = {
+                #     "author": author,
+                #     "projectName": projectName,
+                #     "contactInfo": contactInfo,
+                #     "projectDescription": projectDescription
+                # }
+                # print(request.json)
+                item = request.json
                 number = str(id(item))
                 storage[number] = item
                 return storage[number]
