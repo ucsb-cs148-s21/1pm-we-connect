@@ -16,6 +16,9 @@
 * The meeting went well, the group decided that we need to start setting up more concrete deadlines.
 * For the next person who is leading the retro, I would recommend to first listen to everyone else's opinions and then if you still have an opinion to add, say it.
 
-## Optional
+## Retrospective Outcome
 
-* Record anything else you think the team might want to remember from this retro
+* After doing more meetings in our respective backend and frontend teams, we managed to finish the MVP with the database implemented. Therefore,
+there is substantial evidence that an increase in meetings has improved our productivity. 
+
+
