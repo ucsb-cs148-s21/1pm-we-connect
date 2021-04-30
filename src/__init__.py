@@ -64,10 +64,13 @@ def create_app():
                 return storage
 
             elif(request.method == "POST"):
-                authorArg = request.form["author"]
-                projectNameArg = request.form["projectName"]
+                """
+                authorArg = request.json["author"]
+                projectNameArg = request.["projectName"]
                 contactInfoArg = request.form["contactInfo"]
                 projectDescriptionArg = request.form["projectDescription"]
+                """
+                item = request.json
                 #Removed for database testing
                 """
                 item = {
@@ -83,10 +86,10 @@ def create_app():
 
                 form = formModel(
                     id = number, 
-                    author = authorArg, 
-                    projectName = projectNameArg,
-                    contactInfo = contactInfoArg,
-                    projectDescription = projectDescriptionArg
+                    author = item["author"], 
+                    projectName = item["projectName"],
+                    contactInfo = item["contactInfo"],
+                    projectDescription = item["projectDescription"]
                     )
                 db.session.add(form)
                 db.session.commit()
