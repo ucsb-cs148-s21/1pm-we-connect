@@ -64,12 +64,11 @@ def create_app():
                 return storage
 
             elif(request.method == "POST"):
-                #Removed for database testing
-                
                 authorArg = request.form["author"]
                 projectNameArg = request.form["projectName"]
                 contactInfoArg = request.form["contactInfo"]
                 projectDescriptionArg = request.form["projectDescription"]
+                #Removed for database testing
                 """
                 item = {
                     "author": author,
