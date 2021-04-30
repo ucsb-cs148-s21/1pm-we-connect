@@ -1,16 +1,24 @@
 """Data models."""
 from . import db
 
-class Form(db.Model):
-    """Data model for each post"""
+class formModel(db.Model):
+    __tablename__ = 'form'
 
-    __tablename__ = 'userPosts'
-    userName = db.Column(
-        db.String(64),
-    )
-    postText = db.Column(
-        db.String(64),
-    )
+    id = db.Column(db.Integer, primary_key = True)
+    author = db.Column(db.String(100), nullable = False)
+    projectName = db.Column(db.String(100), nullable = False)
+    contactInfo = db.Column(db.String(12), nullable = False)
+    projectDescription = db.Column(db.String(2000), nullable = False)
 
-    def print(self):
-        return '<User {}>'.format(self.username)
+    def __repr__(self):
+        item = {
+            "author": author,
+            "projectName": projectName,
+            "contactInfo": contactInfo,
+            "projectDescription": projectDescription
+        }
+        return item
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
