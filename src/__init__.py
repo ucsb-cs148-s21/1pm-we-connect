@@ -27,8 +27,8 @@ class formModel(db.Model):
             return item
 
 def create_app():
-    # app = Flask(__name__, static_folder="./build/static", template_folder="./build") # For React to be added later
-    app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
+    app = Flask(__name__, static_folder="./build/static", template_folder="./build") # For React to be added later
+    # app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
 
     #database configuration
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
