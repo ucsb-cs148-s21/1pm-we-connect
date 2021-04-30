@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from "react-router-dom"
 const PostForm = () => {
     const [name, setName] = React.useState('')
     const [projectName, setProjectName] = React.useState('')
@@ -7,47 +8,48 @@ const PostForm = () => {
     //const [topic, setTopic] = React.useState('cs')
 
     const submitForm = (e) => {
-    	e.preventDefault();
+        e.preventDefault();
 
-    	//from reactDocs
-    	fetch('/projects', {
-  			method: 'POST',
-  			headers: {
-    			Accept: 'application/json',
-    			'Content-Type': 'application/json'
-  			},
-  			body: JSON.stringify({
-    			author: name,
-    			projectName: projectName,
-    			contactInfo: contact,
-    			projectDescription: text
+        //from reactDocs
+        fetch('/projects', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                author: name,
+                projectName: projectName,
+                contactInfo: contact,
+                projectDescription: text
 
-  			})
-		});
+            })
+        });
 
-		alert("Form submitted")
+        alert("Form submitted")
+
     }
 
     return (
-        <form  style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
+        <form style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
             <div>
                 <p>Name:</p>
-                <input onChange={e => setName(e.target.value)} value={name} name="author"/>
+                <input onChange={e => setName(e.target.value)} value={name} name="author" />
             </div>
 
             <div>
                 <p>Project Name:</p>
-                <input onChange={e => setProjectName(e.target.value)} value={projectName} name="projectName"/>
+                <input onChange={e => setProjectName(e.target.value)} value={projectName} name="projectName" />
             </div>
 
             <div>
                 <p>Contact:</p>
-                <input onChange={e => setContact(e.target.value)} value={contact} name="contactInfo"/>
+                <input onChange={e => setContact(e.target.value)} value={contact} name="contactInfo" />
             </div>
 
-          <div>
+            <div>
                 <p>Project Description:</p>
-                <textarea type='text' value={text} onChange={e => setText(e.target.value)} name="projectDescription"/>
+                <textarea type='text' value={text} onChange={e => setText(e.target.value)} name="projectDescription" />
             </div>
 
 
@@ -60,7 +62,7 @@ const PostForm = () => {
                 </select>
             </div>*/}
             {<button onClick={submitForm} type="submit">Submit</button>}
-           {/* <button type="submit">Submit</button>*/}
+            {/* <button type="submit">Submit</button>*/}
         </form>
     )
 }
