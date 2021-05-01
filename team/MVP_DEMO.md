@@ -1,2 +1,2 @@
-Demo: https://youtu.be/eOBQX7iNaB8
-Heroku Deployment: https://cs148-mvp-deploy.herokuapp.com/ 
+- Demo: https://youtu.be/eOBQX7iNaB8
+- Heroku Deployment: https://cs148-mvp-deploy.herokuapp.com/ 
