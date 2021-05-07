@@ -4,3 +4,4 @@
 # Frontend
 - Add a way for users to input their own creative input.
 - Make sure the form is completed before user can submit. 
+- Convert NavBar to Material UI.
