@@ -43,12 +43,13 @@ class tagModel(db.Model):
 class PTRelation(db.Model):
         __tablename__ = 'PTRelation'
 
-        iden = db.Column(db.Integer, primary_key = True, nullable=False)
+        iden = db.Column(db.String(100), primary_key = True, nullable=False)
         projectID = db.Column(db.Integer, db.ForeignKey(formModel.id), nullable=False)
         tagName = db.Column(db.String(100), db.ForeignKey(tagModel.name), nullable=False)
 
         def __repr__(self):
             item = {
+            	"iden": iden,
                 "projectID": projectID,
                 "tagName": tagName
             }
@@ -59,9 +60,14 @@ def create_app():
     app = Flask(__name__, static_folder="./build/static", template_folder="./build") # For React to be added later
     # app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
 
+
     #database configuration
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     db.init_app(app)
+
+    if not path.isfile("database.db"):
+    	open("database.db", "w")
+    	db.create_all()
     #Removed for database testing
     """ 
     # Temporary dictionary of dictionaries
@@ -125,11 +131,19 @@ def create_app():
 
                 #print(item["tags"].split())
                 for tag_name in item["tags"].split():
-                    tag = tagModel(name=tag_name)
-                    db.session.add(tag)
 
-                    #relation = PTRelation(iden=random.randrange(1,100), projectID=number, tagName=tag_name)
-                    # db.session.add(relation)
+                    q = db.session.query(tagModel.name).filter(tagModel.name==tag_name)
+                    if not db.session.query(q.exists()).scalar():
+                    	 tag = tagModel(name=tag_name)
+                    	 db.session.add(tag)
+
+
+
+
+               		
+
+                    relation = PTRelation(iden=str(number)+tag_name, projectID=number, tagName=tag_name)
+                    db.session.add(relation)
                     #print(relation)
 
                 db.session.commit()
