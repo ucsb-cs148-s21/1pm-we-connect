@@ -15,5 +15,11 @@ case $1 in
     serve ) python3 ./wsgi.py;;
     frontend-serve ) (cd ./frontend/; npm start);;
     frontend-build ) (cd ./frontend/; npm run build; cp -r build/ ../src/);;
-    *) echo "Please enter a command of: install(installs the required dependencies), serve(serve the backend flask app), frontend-serve(serves the frontend react) or frontend-build(builds the frontend for production)";;
+    format ) poetry run black .;;
+    *) echo "Please enter a command of:
+            install(installs the required dependencies),
+            serve(serve the backend flask app),
+            frontend-serve(serves the frontend react)
+            format(formats the code)
+            frontend-build(builds the frontend for production)";;
 esac
