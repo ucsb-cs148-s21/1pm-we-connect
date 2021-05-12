@@ -12,10 +12,8 @@ import uuid
 def create_app():
     app = Flask(
         __name__, static_folder="./build/static", template_folder="./build"
-    )  # For React to be added later
-    # app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
-
-    # database configuration
+    )
+    # config in ../config.py
     app.config.from_object("config.Config")
     db.init_app(app)
 
