@@ -5,6 +5,7 @@ const PostForm = () => {
     const [projectName, setProjectName] = React.useState('')
     const [text, setText] = React.useState('')
     const [contact, setContact] = React.useState('')
+    const [tags, setTags] = React.useState('')
     //const [topic, setTopic] = React.useState('cs')
 
     const submitForm = (e) => {
@@ -21,7 +22,8 @@ const PostForm = () => {
                 author: name,
                 projectName: projectName,
                 contactInfo: contact,
-                projectDescription: text
+                projectDescription: text,
+                tags: tags
 
             })
         });
@@ -50,6 +52,11 @@ const PostForm = () => {
             <div>
                 <p>Project Description:</p>
                 <textarea type='text' value={text} onChange={e => setText(e.target.value)} name="projectDescription" />
+            </div>
+
+            <div>
+                <p>Tags:</p>
+                <textarea type='tags' value={tags} onChange={e => setTags(e.target.value)} name="tags" />
             </div>
 
 
