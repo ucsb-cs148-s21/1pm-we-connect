@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ProjectList from "../components/ProjectList"
+import { Typography, Box } from "@material-ui/core"
 
 const Home = () => {
     const [data, setData] = useState([])
@@ -18,9 +19,10 @@ const Home = () => {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
+        <Box display="flex" flexDirection="column" >
+            <Typography variant="h2" component="h1" align="center">Projects</Typography>
             <ProjectList list={data}/>
-        </div>
+        </Box>
     )
 }
 
