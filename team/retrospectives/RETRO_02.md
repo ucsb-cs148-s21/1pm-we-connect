@@ -18,5 +18,7 @@
 
 ## Retrospective Outcome
 
-* 
+* We have been significantly less confused as a team ever since we specified exactly what each person should do. Therefore,
+we can conclude that the changes of this retrospective were successful. Moving forward, we will continue trying to improve
+our communication and making sure everyone is on the same page as we move forward in development.
 
