@@ -7,6 +7,7 @@ load_dotenv(path.join(basedir, ".env"))
 
 
 class Config:
+    """Configuration for flask application"""
     """Set Flask configuration from .env file."""
 
     # General Config
@@ -15,6 +16,10 @@ class Config:
     FLASK_ENV = environ.get("FLASK_ENV")
 
     # Database
-    SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
+    if environ.get("TESTING") == "True":
+        TESTING = True
+        SQLALCHEMY_DATABASE_URI = "sqlite:///" + "tests/test-database.db"
+    else:
+        SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False

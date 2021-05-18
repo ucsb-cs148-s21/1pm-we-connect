@@ -20,6 +20,10 @@ def create_app():
     if not path.isfile("database.db"):
         open("database.db", "w")
         db.create_all()
+    if app.config["TESTING"] == True and (not path.isfile("./src/tests/test-database.db")):
+        print(os.getcwd())
+        open("./src/tests/test-database.db", "w")
+        db.create_all()
 
     with app.app_context():
         from .routes import route
