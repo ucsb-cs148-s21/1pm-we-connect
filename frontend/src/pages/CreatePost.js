@@ -2,7 +2,7 @@ import React from "react"
 import PostForm from "../components/PostForm"
 import { makeStyles } from "@material-ui/core/styles"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((_) => ({
     postPage: {
         display: "flex",
         justifyContent: "space-around",

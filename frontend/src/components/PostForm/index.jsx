@@ -1,5 +1,6 @@
 import React from "react"
-import { TextField, Button, Typography } from "@material-ui/core"
+import { TextField, Button, Typography, Chip } from "@material-ui/core"
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from "@material-ui/core/styles"
 import { postProject } from "api-requests"
 import { useForm, Controller } from "react-hook-form"
@@ -32,8 +33,10 @@ const PostForm = () => {
     //     tags: ""
     // }
     const classes = useStyles()
+    const tags = ["hello", "world", "world"]
     const submitForm = (project) => {
-        postProject(project)
+        console.log(project)
+        // postProject(project)
     }
 
     return (
@@ -112,19 +115,35 @@ const PostForm = () => {
                     />
                 )}
             />
+
             <Controller
                 name="tags"
                 control={control}
                 defaultValue=""
                 rules={{ required: "Tags is required" }}
                 render={({ field, fieldState: { error } }) => (
-                    <TextField
+                    <Autocomplete
                         {...field}
-                        error={error}
-                        helperText={error ? error.message : null}
-                        className={classes.formItem}
-                        label={field.name}
-                        variant="outlined"
+                        multiple
+                        value={field.value.length == 0 ? [] : field.value.split(" ")}
+                        options={tags}
+                        freeSolo
+                        getOptionLabel={(option) => option}
+                        onChange={(_, value) => field.onChange(value.join(" "))}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="standard"
+                                error={error}
+                                helperText={
+                                    error !== undefined
+                                        ? error.message
+                                        : "Help people find your project! Example tags: Coding, Cooking, etc"
+                                }
+                                label="Tags"
+                                placeholder="Add a Tag"
+                            />
+                        )}
                     />
                 )}
             />
