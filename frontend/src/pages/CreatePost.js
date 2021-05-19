@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 const CreatePost = () => {
     const classes = useStyles()
     return (
-        <div className={classes.postPage} >
+        <div className={classes.postPage}>
             <PostForm />
         </div>
     )

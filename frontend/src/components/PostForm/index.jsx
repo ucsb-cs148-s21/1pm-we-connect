@@ -1,12 +1,8 @@
 import React from "react"
-import {
-    TextField,
-    Button,
-    Typography,
-} from "@material-ui/core"
+import { TextField, Button, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { postProject } from "api-requests"
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form"
 
 // TODO Add Formik to make the forms a little easier: https://formik.org/docs/tutorial
 //
@@ -16,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(2),
         maxWidth: "50%",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "column"
     },
     formItem: {
-        marginBottom: theme.spacing(2),
+        marginBottom: theme.spacing(2)
     },
     header: {
         marginBottom: theme.spacing(2)
@@ -27,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const PostForm = () => {
-    const { control, handleSubmit } = useForm();
+    const { control, handleSubmit } = useForm()
     // const exampleForm = {
     //     author: "",
     //     projectName: "",
@@ -42,38 +38,96 @@ const PostForm = () => {
 
     return (
         <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
-            <Typography className={classes.header} component="h1" variant="h2" >Create Project</Typography>
+            <Typography className={classes.header} component="h1" variant="h2">
+                Create Project
+            </Typography>
             <Controller
                 name="author"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <TextField {...field} className={classes.formItem} label={field.name} variant="outlined" />}
+                rules={{ required: "Author is required" }}
+                render={({ field, fieldState: { error } }) => {
+                    console.log(error)
+                    return (
+                        <TextField
+                            {...field}
+                            error={error}
+                            helperText={error ? error.message : null}
+                            className={classes.formItem}
+                            label={"Author"}
+                            variant="outlined"
+                        />
+                    )
+                }}
             />
             <Controller
                 name="projectName"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <TextField {...field} className={classes.formItem} label={field.name} variant="outlined" />}
+                rules={{ required: "Project Name is Required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        className={classes.formItem}
+                        error={error}
+                        helperText={error ? error.message : null}
+                        label={"Project Name"}
+                        variant="outlined"
+                    />
+                )}
             />
             <Controller
                 name="projectDescription"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <TextField {...field} className={classes.formItem} label={field.name} variant="outlined" />}
+                rules={{ required: "Project Description is Required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        className={classes.formItem}
+                        error={error}
+                        helperText={error ? error.message : null}
+                        label={"Project Description"}
+                        variant="outlined"
+                    />
+                )}
             />
             <Controller
                 name="contactInfo"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <TextField {...field} className={classes.formItem} label={field.name} variant="outlined" />}
+                rules={{ required: "Contact Info is required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        error={error}
+                        className={classes.formItem}
+                        helperText={
+                            error !== undefined
+                                ? error.message
+                                : "Email, Discord, Phone, etc"
+                        }
+                        label={"Contact Information"}
+                        variant="outlined"
+                    />
+                )}
             />
             <Controller
                 name="tags"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <TextField {...field} className={classes.formItem} label={field.name} variant="outlined" />}
+                rules={{ required: "Tags is required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        error={error}
+                        helperText={error ? error.message : null}
+                        className={classes.formItem}
+                        label={field.name}
+                        variant="outlined"
+                    />
+                )}
             />
-
 
             <Button variant="contained" color="primary" type="submit">
                 Submit
