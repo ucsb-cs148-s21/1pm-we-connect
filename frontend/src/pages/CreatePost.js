@@ -1,21 +1,22 @@
-import React from "react";
-import PostForm from "../components/PostForm";
+import React from "react"
+import PostForm from "../components/PostForm"
+import { makeStyles } from "@material-ui/core/styles"
 
-const CreatePost = () => {
-  return (
-    <div
-      style={{
+const useStyles = makeStyles((theme) => ({
+    postPage: {
         display: "flex",
         justifyContent: "space-around",
-        alignItems: "center",
         alignContent: "space-between",
-        paddingTop: "50px",
-        paddingLeft: "50px",
-      }}
-    >
-      <PostForm />
-    </div>
-  );
-};
+        height: "100vh"
+    }
+}))
+const CreatePost = () => {
+    const classes = useStyles()
+    return (
+        <div className={classes.postPage} >
+            <PostForm />
+        </div>
+    )
+}
 
-export default CreatePost;
+export default CreatePost
