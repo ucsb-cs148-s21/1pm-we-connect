@@ -25,7 +25,7 @@ const Ideas = ({ list }) => {
 
     return (
         <Box display="flex" flexDirection="column" justifyContent="space-between">
-          { list.map((x) => <Idea {...x} />) }
+          { list &&  list.map((x) => <Idea {...x} />) }
         </Box>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Redirect } from "react-router-dom"
+// import { Redirect } from "react-router-dom"
+import { postProjects } from "api-requests" // absolute imports
 const PostForm = () => {
     const [name, setName] = React.useState('')
     const [projectName, setProjectName] = React.useState('')
@@ -10,23 +11,17 @@ const PostForm = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
+        const form = {
+            author: name,
+            projectName: projectName,
+            contactInfo: contact,
+            projectDescription: text,
+            tags: tags
 
-        //from reactDocs
-        fetch('/projects', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                author: name,
-                projectName: projectName,
-                contactInfo: contact,
-                projectDescription: text,
-                tags: tags
+        }
+        postProjects(form);
 
-            })
-        });
+
 
         alert("Form submitted")
 
