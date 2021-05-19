@@ -3,8 +3,9 @@ import PostForm from '../components/PostForm'
 
 const CreatePost = () => {
     return (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: "space-between", height:"40vh", paddingTop:"50px" }}>
+        <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', alignContent: "space-between", paddingTop:"50px", paddingLeft:"50px" }}>
             <PostForm/>
+        
         </div>
     )
 }
