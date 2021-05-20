@@ -35,8 +35,8 @@ const PostForm = () => {
     const classes = useStyles()
     const tags = ["hello", "world", "world"]
     const submitForm = (project) => {
-        console.log(project)
-        // postProject(project)
+        // console.log(project)
+        postProject(project)
     }
 
     return (
