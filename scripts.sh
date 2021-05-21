@@ -15,6 +15,7 @@ case $1 in
     serve ) python3 ./wsgi.py;;
     frontend-serve ) (cd ./frontend/; npm start);;
     frontend-build ) (cd ./frontend/; npm run build; cp -r build/ ../src/);;
+    test-backend ) poetry run pytest;;
     format ) poetry run black .;;
     *) echo "Please enter a command of:
             install(installs the required dependencies),
