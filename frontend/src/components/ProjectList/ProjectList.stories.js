@@ -12,11 +12,7 @@ export default {
 const Template = (args) => <Ideas {...args} />
 export const Default = Template.bind({})
 Default.args = {
-    list: [
-        { idea: "hello", leaderName: "thanawat", contactInfo: "111-111-1111" },
-        { idea: "hello", leaderName: "thanawat", contactInfo: "111-111-1111" },
-        { idea: "hello", leaderName: "thanawat", contactInfo: "111-111-1111" }
-    ]
+    list: Array(10).fill({ author: "thanawat", projectName: "hello", contactInfo: "111-111-1111", projectDescription: "hello" })
 }
 
 // export const Small = Template.bind({});
