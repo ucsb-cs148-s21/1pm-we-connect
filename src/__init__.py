@@ -17,9 +17,11 @@ def create_app():
     app.config.from_object("config.Config")
     db.init_app(app)
 
-    if not path.isfile("database.db"):
-        open("database.db", "w")
-        db.create_all()
+    if not path.isfile("./src/database.db"):
+        open("./src/database.db", "w")
+        print("initializing table")
+        with app.app_context():
+            db.create_all()
     if app.config["TESTING"] == True and (not path.isfile("./src/tests/test-database.db")):
         print(os.getcwd())
         open("./src/tests/test-database.db", "w")
