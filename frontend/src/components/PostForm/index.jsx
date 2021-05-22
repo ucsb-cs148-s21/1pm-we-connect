@@ -33,7 +33,7 @@ const PostForm = () => {
     //     tags: ""
     // }
     const classes = useStyles()
-    const tags = ["hello", "world", "world"]
+    const tags = ["Art", "ComputerScience", "ElectricalEngineering", "Film", "MechanicalEngineering", "Music", "Photography", "Physics", "SoftwareEngineering"]
     const submitForm = (project) => {
         // console.log(project)
         postProject(project)
