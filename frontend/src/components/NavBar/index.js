@@ -36,8 +36,9 @@ const Navbar = ({ setDark, dark }) => {
             We Connect
           </Typography>
           <div>
-            <Button color="inherit" component={Link} to='about'>About</Button>
             <Button color="inherit" component={Link} to='createPost'>Create Post</Button>
+            <Button color="inherit" component={Link} to='about'>About</Button>
+            <Button color="inherit" component={Link} to='help'>Help</Button>
             <Switch
               checked={dark}
               onChange={() => setDark(prev => !prev)}
