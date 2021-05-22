@@ -28,6 +28,7 @@ class tagModel(db.Model):
     __tablename__ = "tag"
 
     name = db.Column(db.String(100), primary_key=True, nullable=False)
+    count = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         item = {"name": self.name}

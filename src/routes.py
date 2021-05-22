@@ -1,8 +1,16 @@
 from flask import Blueprint, render_template, request
-from .__init__ import db
-from .models import formModel, tagModel, PTRelation
+#from .__init__ import db
+from .models import formModel, tagModel, PTRelation, db
+import json
 
 route = Blueprint("route", __name__)
+
+
+@route.route("/popular/<int:n>")
+def getTags(n):
+    allTags = db.session.query(tagModel).order_by(tagModel.count.desc()).limit(n).all()
+    print(allTags[0].count)
+    return {"tags": list(map(lambda tag: {"name": tag.name, "count": tag.count} ,allTags))}
 
 
 @route.route("/")
@@ -42,10 +50,14 @@ def projects():
         # print(item["tags"].split())
         for tag_name in item["tags"].split():
 
-            q = db.session.query(tagModel.name).filter(tagModel.name == tag_name)
-            if not db.session.query(q.exists()).scalar():
-                tag = tagModel(name=tag_name)
+            q = db.session.query(tagModel).filter(tagModel.name == tag_name).first()
+            if q == None:
+                tag = tagModel(name=tag_name, count=1)
                 db.session.add(tag)
+            else:
+                #print(q.count)
+                q.count = q.count+1
+                #db.session.commit()
 
             relation = PTRelation(
                 iden=str(number) + tag_name, projectID=number, tagName=tag_name
