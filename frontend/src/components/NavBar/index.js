@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
+    textDecoration: 'none',
+    color: 'inherit'
   },
 }));
 
@@ -31,12 +32,13 @@ const Navbar = ({ setDark, dark }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" component={Link} to='/'>
+          <Typography className={classes.title} variant="h6" component={Link} to='/'>
             We Connect
           </Typography>
           <div>
-            <Button color="inherit" component={Link} to='about'>About</Button>
             <Button color="inherit" component={Link} to='createPost'>Create Post</Button>
+            <Button color="inherit" component={Link} to='about'>About</Button>
+            <Button color="inherit" component={Link} to='help'>Help</Button>
             <Switch
               checked={dark}
               onChange={() => setDark(prev => !prev)}
