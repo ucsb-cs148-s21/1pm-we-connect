@@ -37,6 +37,7 @@ const PostForm = () => {
     const submitForm = (project) => {
         // console.log(project)
         postProject(project)
+        window.location.href="/";
     }
 
     return (
@@ -125,7 +126,7 @@ const PostForm = () => {
                     <Autocomplete
                         {...field}
                         multiple
-                        value={field.value.length == 0 ? [] : field.value.split(" ")}
+                        value={field.value.length === 0 ? [] : field.value.split(" ")}
                         options={tags}
                         freeSolo
                         getOptionLabel={(option) => option}
