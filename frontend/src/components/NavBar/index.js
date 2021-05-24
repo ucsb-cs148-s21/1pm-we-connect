@@ -1,19 +1,55 @@
-import React from "react"
-import { Nav, NavLink, NavMenu, NavBtn, NavBtnLink } from "./NavBarElements"
+import React from 'react';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Switch,
+  Typography
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { NavLink as Link } from 'react-router-dom';
 
-const Navbar = () => {
-    return (
-        <Nav>
-            <NavLink to="/">WeConnect</NavLink>
-            <NavMenu>
-                <NavLink to="/createPost">Create Post</NavLink>
-                <NavLink to="/sign-up">Sign Up</NavLink>
-                <NavBtn>
-                    <NavBtnLink to="/signin">Sign In</NavBtnLink>
-                </NavBtn>
-            </NavMenu>
-        </Nav>
-    )
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    textDecoration: 'none',
+    color: 'inherit'
+  },
+}));
 
-export default Navbar
+const Navbar = ({ setDark, dark }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar className={classes.toolbar}>
+          <Typography className={classes.title} variant="h6" component={Link} to='/'>
+            We Connect
+          </Typography>
+          <div>
+            <Button color="inherit" component={Link} to='createPost'>Create Post</Button>
+            <Button color="inherit" component={Link} to='about'>About</Button>
+            <Button color="inherit" component={Link} to='help'>Help</Button>
+            <Switch
+              checked={dark}
+              onChange={() => setDark(prev => !prev)}
+              name="darktheme"
+            />
+            <Typography variant="h6" component="label"/>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
+};
+
+export default Navbar;

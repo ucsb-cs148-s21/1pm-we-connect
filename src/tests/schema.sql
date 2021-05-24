@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS form;
+DROP TABLE IF EXISTS tag;
+DROP TABLE IF EXISTS PTRelation;
+
+CREATE TABLE form (
+	id INTEGER NOT NULL,
+	author VARCHAR(100) NOT NULL,
+	"projectName" VARCHAR(100) NOT NULL,
+	"contactInfo" VARCHAR(12) NOT NULL,
+	"projectDescription" VARCHAR(2000) NOT NULL,
+	PRIMARY KEY (id)
+);
+CREATE TABLE tag (
+	name VARCHAR(100) NOT NULL,
+	PRIMARY KEY (name)
+);
+CREATE TABLE IF NOT EXISTS "PTRelation" (
+	iden VARCHAR(100) NOT NULL,
+	"projectID" INTEGER NOT NULL,
+	"tagName" VARCHAR(100) NOT NULL,
+	PRIMARY KEY (iden),
+	FOREIGN KEY("projectID") REFERENCES form (id),
+	FOREIGN KEY("tagName") REFERENCES tag (name)
+);
