@@ -1,86 +1,155 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
 import { makeStyles } from "@material-ui/core/styles"
 import { findByLabelText } from '@testing-library/dom';
 import { red } from '@material-ui/core/colors';
+import { Card, CardContent, Typography, Box } from "@material-ui/core"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 1000,
+        margin: "50px 150px 50px 150px",
+    },
     person: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        //alignItems: 'flex-start',
-        margin: '100px',
-        //fontFamily: "Serif",
-        fontSize: '25px',
-        //backgroundColor: theme.palette.primary.main,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
     },
 
-    image: {
-        //backgroundColor: theme.palette.primary.main, 
-        //paddingRight: '50px',
-        width: '300px',
-        height: '300px',
-        
-    },
     text: {
-        padding: '25px 300px 0px 300px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        //justifyContent: 'flex-start',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "0px 50px 0px 50px",
     },
-
     link: {
         textDecoration: 'underline',
         color: 'inherit',
     }
-}))
+})
 
-const AboutUsBlock = () => {
-    const classes = useStyles();
+const AboutUsBlock = ( {imageLink, name, description, direction} ) => {
+    const classes = useStyles()
+    if(direction){
     return (
-        <div>
-            <div className={classes.person}>  
+        <Card className={classes.root}>
+            <CardContent className={classes.person}>
                 <img 
-                    className={classes.image}
-                    src="https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook"
-                    //height="400px" width="400px"
+                    src={imageLink}
+                    height="400px" width="400px"
                 />
                 <div className={classes.text}>
-                    <Typography variant="h7" gutterBottom>Mr. Pringles Man</Typography>
-                    <Typography>
-                        I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
-                        My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
-                        The people who don't believe me are just haters. But you know what they say, haters
-                        are my motivators. Click <a className={classes.link} href="https://www.pringles.com/us/home.html">here</a> if 
-                        you want to learn more about me.
+                    <Typography variant="h4" component="h1" gutterBottom>
+                        {name}
+                    </Typography>
+                    <Typography variant="p" component="p">
+                        {description}
                     </Typography>
                 </div>
-            </div>
-
-            <div className={classes.person}>  
-                <img 
-                    className={classes.image}
-                    src="https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook"
-                    //height="400px" width="400px"
-                />
-                <div className={classes.text}>
-                    <Typography variant="h7" gutterBottom>Mr. Pringles Man</Typography>
-                    <Typography>
-                        I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
-                        My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
-                        The people who don't believe me are just haters. But you know what they say, haters
-                        are my motivators. Click <a className={classes.link} href="https://www.pringles.com/us/home.html">here</a> if 
-                        you want to learn more about me.
-                    </Typography>
-                </div>
-            </div>
-            
-        </div>
+            </CardContent>
+        </Card>
     )
-} 
+    }
+    else{
+    return (
+        <Card className={classes.root}>
+            <CardContent className={classes.person}>
 
+                <div className={classes.text}>
+                    <Typography variant="h4" component="h1" gutterBottom>
+                        {name}
+                    </Typography>
+                    <Typography variant="p" component="p">
+                        {description}
+                    </Typography>
+                </div>
+                <img 
+                    src={imageLink}
+                    height="400px" width="400px"
+                />
+            </CardContent>
+        </Card>
+    )
+    }
+}
 
-export default AboutUsBlock
+const AboutUsBlocks = ({ list }) => {
+    list = [
+        {
+            imageLink: "https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook",
+            name: "Mr. Pringles Man", 
+            description: 
+            <Typography>
+            I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
+            My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
+            The people who don't believe me are just haters. But you know what they say, haters
+            are my motivators. Click <a className={useStyles().link} href="https://www.pringles.com/us/home.html">here</a> if 
+            you want to learn more about me.
+            </Typography>,
+            direction: true
+        },
+        {
+            imageLink: "https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook",
+            name: "Mr. Pringles Man", 
+            description: 
+            <Typography>
+            I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
+            My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
+            The people who don't believe me are just haters. But you know what they say, haters
+            are my motivators. Click <a className={useStyles().link} href="https://www.pringles.com/us/home.html">here</a> if 
+            you want to learn more about me.
+            </Typography>,
+            direction: false
+        },
+        {
+            imageLink: "https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook",
+            name: "Mr. Pringles Man", 
+            description: 
+            <Typography>
+            I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
+            My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
+            The people who don't believe me are just haters. But you know what they say, haters
+            are my motivators. Click <a className={useStyles().link} href="https://www.pringles.com/us/home.html">here</a> if 
+            you want to learn more about me.
+            </Typography>,
+            direction: true
+        },
+        {
+            imageLink: "https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook",
+            name: "Mr. Pringles Man", 
+            description: 
+            <Typography>
+            I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
+            My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
+            The people who don't believe me are just haters. But you know what they say, haters
+            are my motivators. Click <a className={useStyles().link} href="https://www.pringles.com/us/home.html">here</a> if 
+            you want to learn more about me.
+            </Typography>,
+            direction: false
+        },
+        {
+            imageLink: "https://mma.prnewswire.com/media/1346408/Pringles_Logo.jpg?p=facebook",
+            name: "Mr. Pringles Man", 
+            description: 
+            <Typography>
+            I'm a simple man. My potato chips are crispy, delicious, and quite exquisite. 
+            My eyes may seem lifeless, but I feel great. In fact, I'm a completely changed man.
+            The people who don't believe me are just haters. But you know what they say, haters
+            are my motivators. Click <a className={useStyles().link} href="https://www.pringles.com/us/home.html">here</a> if 
+            you want to learn more about me.
+            </Typography>,
+            direction: true
+        },
+    ]
+    return (
+        <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            alignItems="center"
+        >
+            {list && list.map((x) => <AboutUsBlock {...x} />)}
+        </Box>
+    )
+}
+
+export default AboutUsBlocks
