@@ -13,6 +13,7 @@ class formModel(db.Model):
     projectName = db.Column(db.String(100), nullable=False)
     contactInfo = db.Column(db.String(12), nullable=False)
     projectDescription = db.Column(db.String(2000), nullable=False)
+    tagsString = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         item = {
@@ -20,6 +21,7 @@ class formModel(db.Model):
             "projectName": self.projectName,
             "contactInfo": self.contactInfo,
             "projectDescription": self.projectDescription,
+            "tagsString": self.tagsString
         }
         return item
 
@@ -28,6 +30,7 @@ class tagModel(db.Model):
     __tablename__ = "tag"
 
     name = db.Column(db.String(100), primary_key=True, nullable=False)
+    count = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         item = {"name": self.name}
