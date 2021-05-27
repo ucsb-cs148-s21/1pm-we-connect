@@ -38,7 +38,7 @@ const Navbar = ({ setDark, dark }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false)
   const theme = useTheme()
-  const mobile = useMediaQuery(theme.breakpoints.down('md'));
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <div className={classes.root}>

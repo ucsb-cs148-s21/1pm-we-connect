@@ -1,5 +1,5 @@
 import React from "react"
-import { TextField, Button, Typography, Chip } from "@material-ui/core"
+import { TextField, Button, Typography, Chip, useMediaQuery, useTheme } from "@material-ui/core"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from "@material-ui/core/styles"
 import { useForm, Controller } from "react-hook-form"
@@ -13,18 +13,23 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignSelf: "center",
-
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: "75%"
+        },
     },
     formItem: {
         marginBottom: theme.spacing(2)
     },
     header: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        textAlign: "center"
     }
 }))
 
-const PostForm = ({ submitForm }) => {
+const PostForm = ({ submitForm, tags }) => {
     const { control, handleSubmit, formState } = useForm()
+    const theme = useTheme()
+    const mobile = useMediaQuery(theme.breakpoints.down('sm'));
     // const exampleForm = {
     //     author: "",
     //     projectName: "",
@@ -34,12 +39,13 @@ const PostForm = ({ submitForm }) => {
     // }
     const classes = useStyles()
     // TODO get tags from most populatr tags
+
     const tags = ["Art", "ComputerScience", "ElectricalEngineering", "Film", "MechanicalEngineering", "Music", "Photography", "Physics", "SoftwareEngineering"]
 
 
     return (
         <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
-            <Typography className={classes.header} component="h1" variant="h2">
+            <Typography className={classes.header} component="h1" variant={mobile ? "h3" : "h2"}>
                 Create Project
             </Typography>
             <Controller
