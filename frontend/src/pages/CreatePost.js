@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from "@material-ui/core/styles"
 import { postProject } from "api-requests"
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     postPage: {
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 const CreatePost = () => {
-    let history = useHistory()
     const [successAlert, setSuccess] = useState(false)
     const [failAlert, setFailAlert] = useState(false)
     const submitForm = (project) => {

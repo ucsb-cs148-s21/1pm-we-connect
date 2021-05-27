@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const PostForm = ({ submitForm, tags }) => {
+const PostForm = ({ submitForm }) => {
     const { control, handleSubmit, formState } = useForm()
     const theme = useTheme()
     const mobile = useMediaQuery(theme.breakpoints.down('sm'));
