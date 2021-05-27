@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { Card, CardContent, Typography, Box, useMediaQuery } from "@material-ui/core"
 
-const Idea = ({ author, projectName, contactInfo, projectDescription }) => {
+const Idea = ({ author, projectName, contactInfo, projectDescription, tagsString}) => {
     const useStyles = makeStyles({
         card: {
             margin: "20px"
@@ -23,6 +23,10 @@ const Idea = ({ author, projectName, contactInfo, projectDescription }) => {
                 </Typography>
                 <Typography variant="p" component="p">
                     Project Description: {projectDescription}
+                </Typography>
+
+                <Typography variant="p" component="p">
+                    Tags: {tagsString}
                 </Typography>
             </CardContent>
         </Card>
