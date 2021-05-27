@@ -2,18 +2,18 @@ import React from "react"
 import { TextField, Button, Typography, Chip } from "@material-ui/core"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from "@material-ui/core/styles"
-import { postProject } from "api-requests"
 import { useForm, Controller } from "react-hook-form"
 
-// TODO Add Formik to make the forms a little easier: https://formik.org/docs/tutorial
-//
+// TODO Notify the user if the form is submitted or if there's an error
 
 const useStyles = makeStyles((theme) => ({
     form: {
         paddingTop: theme.spacing(2),
         maxWidth: "50%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        alignSelf: "center",
+
     },
     formItem: {
         marginBottom: theme.spacing(2)
@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const PostForm = () => {
-    const { control, handleSubmit } = useForm()
+const PostForm = ({ submitForm }) => {
+    const { control, handleSubmit, formState } = useForm()
     // const exampleForm = {
     //     author: "",
     //     projectName: "",
@@ -33,12 +33,9 @@ const PostForm = () => {
     //     tags: ""
     // }
     const classes = useStyles()
+    // TODO get tags from most populatr tags
     const tags = ["Art", "ComputerScience", "ElectricalEngineering", "Film", "MechanicalEngineering", "Music", "Photography", "Physics", "SoftwareEngineering"]
-    const submitForm = (project) => {
-        // console.log(project)
-        postProject(project)
-        window.location.href="/";
-    }
+
 
     return (
         <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
@@ -51,7 +48,6 @@ const PostForm = () => {
                 defaultValue=""
                 rules={{ required: "Author is required" }}
                 render={({ field, fieldState: { error } }) => {
-                    console.log(error)
                     return (
                         <TextField
                             {...field}
@@ -149,7 +145,7 @@ const PostForm = () => {
                 )}
             />
 
-            <Button variant="contained" color="primary" type="submit">
+          <Button disabled={formState.isSubmitting} variant="contained" color="primary" type="submit">
                 Submit
             </Button>
         </form>
