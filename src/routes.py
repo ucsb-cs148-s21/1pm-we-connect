@@ -12,25 +12,28 @@ def getTags(n):
     print(allTags[0].count)
     return {"tags": list(map(lambda tag: {"name": tag.name, "count": tag.count} ,allTags))}
 
-@route.route("/search/<item>")
-def search(item):
-	allRelations = db.session.query(PTRelation).filter(PTRelation.tagName == item).all()
-	ids = set()
-	for relation in allRelations:
-		ids.add(relation.projectID)
+@route.route("/search/<items>")
+def search(items):
+    items = items.split("_")
+    storage = {}
+    for item in items:
+    	allRelations = db.session.query(PTRelation).filter(PTRelation.tagName == item).all()
+    	ids = set()
+    	for relation in allRelations:
+    		ids.add(relation.projectID)
 
-	print(ids)
-	allForms = db.session.query(formModel).filter(formModel.id.in_(ids)).all()
-	#print(allForms)
-	storage = {}
-	for form in allForms:
-		storage[str(form.id)] = {
-            "author": form.author,
-            "projectName": form.projectName,
-            "contactInfo": form.contactInfo,
-            "projectDescription": form.projectDescription,
-        }
-	return storage
+    	print(ids)
+    	allForms = db.session.query(formModel).filter(formModel.id.in_(ids)).all()
+    	#print(allForms)
+    	for form in allForms:
+    		storage[str(form.id)] = {
+                "author": form.author,
+                "projectName": form.projectName,
+                "contactInfo": form.contactInfo,
+                "projectDescription": form.projectDescription,
+                "tagsString": form.tagsString
+            }
+    return storage
 
 @route.route("/")
 def index():
