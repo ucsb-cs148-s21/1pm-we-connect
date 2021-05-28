@@ -1,50 +1,183 @@
-import React from 'react'
-const PostForm = () => {
-    const [name, setName] = React.useState('')
-    const [text, setText] = React.useState('')
-    const [topic, setTopic] = React.useState('cs')
+import React, { useEffect, useState } from "react"
+import { TextField, Button, Typography, Chip, useMediaQuery, useTheme } from "@material-ui/core"
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { makeStyles } from "@material-ui/core/styles"
+import { useForm, Controller } from "react-hook-form"
+import { getTags } from "api-requests"
 
-    const submitForm = (e) => {
-    	e.preventDefault();
+// TODO Notify the user if the form is submitted or if there's an error
 
-    	//from reactDocs
-    	fetch('/projects/100/2', {
-  			method: 'POST',
-  			headers: {
-    			Accept: 'application/json',
-    			'Content-Type': 'application/json'
-  			},
-  			body: JSON.stringify({
-    			author: name,
-    			projectName: "tbd",
-    			contactInfo: "111-111-1111",
-    			projectDescription: text
-
-  			})
-		});
-
-		alert("Form submitted")
+const useStyles = makeStyles((theme) => ({
+    form: {
+        paddingTop: theme.spacing(2),
+        maxWidth: "50%",
+        display: "flex",
+        flexDirection: "column",
+        alignSelf: "center",
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: "75%"
+        },
+    },
+    formItem: {
+        marginBottom: theme.spacing(2)
+    },
+    header: {
+        marginBottom: theme.spacing(2),
+        textAlign: "center"
     }
+}))
+
+const PostForm = ({ submitForm }) => {
+    //      example tags: [
+    //   {
+    //     "count": 2,
+    //     "name": "cs"
+    //   },
+    //   {
+    //     "count": 1,
+    //     "name": "math"
+    //   },
+    //   {
+    //     "count": 1,
+    //     "name": "dance"
+    //   }
+    // ]
+    const { control, handleSubmit, formState } = useForm()
+    const theme = useTheme()
+    const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const [tags, setTags] = useState([])
+    // const exampleForm = {
+    //     author: "",
+    //     projectName: "",
+    //     projectDescription: "",
+    //     contactInfo: "",
+    //     tags: ""
+    // }
+    const classes = useStyles()
+    // TODO get tags from most populatr tags
+
+    // const tags = ["Art", "ComputerScience", "ElectricalEngineering", "Film", "MechanicalEngineering", "Music", "Photography", "Physics", "SoftwareEngineering"]
+    useEffect(() => {
+        getTags().then(body => setTags(body.tags))
+    }, [])
+
+
 
     return (
-        <form style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-            <div>
-                <p>Name:</p>
-                <input onChange={e => setName(e.target.value)} value={name} />
-            </div>
-          <div>
-                <p>Project Description:</p>
-                <textarea type='text' value={text} onChange={e => setText(e.target.value)} />
-            </div>
-            <div>
-                <p>Major </p>
-                <select value={topic} onChange={e => setTopic(e.target.value)}>
-                    <option value="cs">Computer Science</option>
-                    <option value="phys">Physics</option>
-                    <option value="film">Film</option>
-                </select>
-            </div>
-            <button onClick={submitForm} type="submit">Submit</button>
+        <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
+            <Typography className={classes.header} component="h1" variant={mobile ? "h3" : "h2"}>
+                Create Project
+            </Typography>
+            <Controller
+                name="author"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Author is required" }}
+                render={({ field, fieldState: { error } }) => {
+                    return (
+                        <TextField
+                            {...field}
+                            error={error}
+                            helperText={error ? error.message : null}
+                            className={classes.formItem}
+                            label={"Author"}
+                            variant="outlined"
+                        />
+                    )
+                }}
+            />
+            <Controller
+                name="projectName"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Project Name is Required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        className={classes.formItem}
+                        error={error}
+                        helperText={error ? error.message : null}
+                        label={"Project Name"}
+                        variant="outlined"
+                    />
+                )}
+            />
+            <Controller
+                name="projectDescription"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Project Description is Required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        className={classes.formItem}
+                        error={error}
+                        helperText={error ? error.message : null}
+                        label={"Project Description"}
+                        variant="outlined"
+                    />
+                )}
+            />
+            <Controller
+                name="contactInfo"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Contact Info is required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        {...field}
+                        error={error}
+                        className={classes.formItem}
+                        helperText={
+                            error !== undefined
+                                ? error.message
+                                : "Email, Discord, Phone, etc"
+                        }
+                        label={"Contact Information"}
+                        variant="outlined"
+                    />
+                )}
+            />
+
+            <Controller
+                name="tags"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Tags is required" }}
+                render={({ field, fieldState: { error } }) => (
+                    <Autocomplete
+                        {...field}
+                        multiple
+                        value={field.value.length === 0 ? [] : field.value.split(" ")}
+                        freeSolo
+                        options={tags.map((option) => option.name)}
+                        onChange={(_, value) => field.onChange(value.join(" "))}
+                        renderTags={(value, getTagProps) =>
+                            value.map((option, index) => (
+                                <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                            ))
+                        }
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="standard"
+                                error={error}
+                                helperText={
+                                    error !== undefined
+                                        ? error.message
+                                        : "Help people find your project! Example tags: Coding, Cooking, etc"
+                                }
+                                label="Tags"
+                                placeholder="Add a Tag"
+                            />
+                        )}
+                    />
+                )}
+            />
+
+            <Button disabled={formState.isSubmitting} variant="contained" color="primary" type="submit">
+                Submit
+            </Button>
         </form>
     )
 }

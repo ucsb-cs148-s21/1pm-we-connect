@@ -15,5 +15,14 @@ case $1 in
     serve ) python3 ./wsgi.py;;
     frontend-serve ) (cd ./frontend/; npm start);;
     frontend-build ) (cd ./frontend/; npm run build; cp -r build/ ../src/);;
-    *) echo "Please enter a command of: install(installs the required dependencies), serve(serve the backend flask app), frontend-serve(serves the frontend react) or frontend-build(builds the frontend for production)";;
+    test-backend ) TESTING=True poetry run pytest;;
+    format ) poetry run black .;;
+    expt-req ) poetry export -f requirements.txt --output requirements.txt;;
+    *) echo "Please enter a command of:
+            install(installs the required dependencies),
+            serve(serve the backend flask app),
+            frontend-serve(serves the frontend react)
+            format(formats the code)
+            expt-req(exports the requirements.txt file for deployment)
+            frontend-build(builds the frontend for production)";;
 esac
