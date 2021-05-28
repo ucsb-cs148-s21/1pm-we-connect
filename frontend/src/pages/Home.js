@@ -49,7 +49,8 @@ const Home = () => {
                         {...params}
                         variant="standard"
                         label="Tags"
-                        placeholder="Add a Tag"
+                        multiline
+                        placeholder="Press enter or click on a tag to add a Tag"
                     />
                 )}
             />
