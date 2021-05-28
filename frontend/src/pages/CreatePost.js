@@ -23,11 +23,14 @@ const useStyles = makeStyles((theme) => ({
 const CreatePost = () => {
     const [successAlert, setSuccess] = useState(false)
     const [failAlert, setFailAlert] = useState(false)
-    const submitForm = (project) => {
+    const submitForm = (reset) => (project) => {
         // console.log(project)
         postProject(project).then((res) => {
-            if (res.status === 200) { setSuccess(true) }
-            else {
+            if (res.status === 200) {
+                setSuccess(true)
+                reset({ author: project.author, tags: [] })
+
+            } else {
                 setFailAlert(true)
             }
         })

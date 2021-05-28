@@ -42,7 +42,7 @@ const PostForm = ({ submitForm }) => {
     //     "name": "dance"
     //   }
     // ]
-    const { control, handleSubmit, formState } = useForm()
+    const { reset, control, handleSubmit, formState } = useForm()
     const theme = useTheme()
     const mobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [tags, setTags] = useState([])
@@ -64,7 +64,7 @@ const PostForm = ({ submitForm }) => {
 
 
     return (
-        <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
+        <form className={classes.form} onSubmit={handleSubmit(submitForm(reset))}>
             <Typography className={classes.header} component="h1" variant={mobile ? "h3" : "h2"}>
                 Create Project
             </Typography>
@@ -112,6 +112,8 @@ const PostForm = ({ submitForm }) => {
                         {...field}
                         className={classes.formItem}
                         error={error}
+                        multiline
+                        rows={3}
                         helperText={error ? error.message : null}
                         label={"Project Description"}
                         variant="outlined"
@@ -162,13 +164,14 @@ const PostForm = ({ submitForm }) => {
                                 {...params}
                                 variant="standard"
                                 error={error}
+                                multiline
                                 helperText={
                                     error !== undefined
                                         ? error.message
-                                        : "Help people find your project! Example tags: Coding, Cooking, etc"
+                                        : "Help people find your project! Tags can't have spaces. Example tags: Coding, Cooking, etc"
                                 }
                                 label="Tags"
-                                placeholder="Add a Tag"
+                                placeholder="Click on a tag or press enter to add tag"
                             />
                         )}
                     />
