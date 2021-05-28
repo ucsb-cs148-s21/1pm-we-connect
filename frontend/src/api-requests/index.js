@@ -9,3 +9,5 @@ export const postProject = (project) =>
     })
 export const getProjects = () =>
     fetch("/projects").then((response) => response.json())
+export const getTags = () => fetch("/popular/20").then((res) => res.json())
+export const getProjectsUsingTags = (tags) => fetch("/search/" + tags.join("_")).then(res => res.json())

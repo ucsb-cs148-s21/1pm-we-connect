@@ -1,30 +1,51 @@
-import React from "react"
-import { TextField, Button, Typography, Chip } from "@material-ui/core"
+import React, { useEffect, useState } from "react"
+import { TextField, Button, Typography, Chip, useMediaQuery, useTheme } from "@material-ui/core"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from "@material-ui/core/styles"
-import { postProject } from "api-requests"
 import { useForm, Controller } from "react-hook-form"
+import { getTags } from "api-requests"
 
-// TODO Add Formik to make the forms a little easier: https://formik.org/docs/tutorial
-//
+// TODO Notify the user if the form is submitted or if there's an error
 
 const useStyles = makeStyles((theme) => ({
     form: {
         paddingTop: theme.spacing(2),
         maxWidth: "50%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        alignSelf: "center",
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: "75%"
+        },
     },
     formItem: {
         marginBottom: theme.spacing(2)
     },
     header: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        textAlign: "center"
     }
 }))
 
-const PostForm = () => {
-    const { control, handleSubmit } = useForm()
+const PostForm = ({ submitForm }) => {
+    //      example tags: [
+    //   {
+    //     "count": 2,
+    //     "name": "cs"
+    //   },
+    //   {
+    //     "count": 1,
+    //     "name": "math"
+    //   },
+    //   {
+    //     "count": 1,
+    //     "name": "dance"
+    //   }
+    // ]
+    const { control, handleSubmit, formState } = useForm()
+    const theme = useTheme()
+    const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const [tags, setTags] = useState([])
     // const exampleForm = {
     //     author: "",
     //     projectName: "",
@@ -33,16 +54,18 @@ const PostForm = () => {
     //     tags: ""
     // }
     const classes = useStyles()
-    const tags = ["Art", "ComputerScience", "ElectricalEngineering", "Film", "MechanicalEngineering", "Music", "Photography", "Physics", "SoftwareEngineering"]
-    const submitForm = (project) => {
-        // console.log(project)
-        postProject(project)
-        window.location.href="/";
-    }
+    // TODO get tags from most populatr tags
+
+    // const tags = ["Art", "ComputerScience", "ElectricalEngineering", "Film", "MechanicalEngineering", "Music", "Photography", "Physics", "SoftwareEngineering"]
+    useEffect(() => {
+        getTags().then(body => setTags(body.tags))
+    }, [])
+
+
 
     return (
         <form className={classes.form} onSubmit={handleSubmit(submitForm)}>
-            <Typography className={classes.header} component="h1" variant="h2">
+            <Typography className={classes.header} component="h1" variant={mobile ? "h3" : "h2"}>
                 Create Project
             </Typography>
             <Controller
@@ -51,7 +74,6 @@ const PostForm = () => {
                 defaultValue=""
                 rules={{ required: "Author is required" }}
                 render={({ field, fieldState: { error } }) => {
-                    console.log(error)
                     return (
                         <TextField
                             {...field}
@@ -127,10 +149,14 @@ const PostForm = () => {
                         {...field}
                         multiple
                         value={field.value.length === 0 ? [] : field.value.split(" ")}
-                        options={tags}
                         freeSolo
-                        getOptionLabel={(option) => option}
+                        options={tags.map((option) => option.name)}
                         onChange={(_, value) => field.onChange(value.join(" "))}
+                        renderTags={(value, getTagProps) =>
+                            value.map((option, index) => (
+                                <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                            ))
+                        }
                         renderInput={(params) => (
                             <TextField
                                 {...params}
@@ -149,7 +175,7 @@ const PostForm = () => {
                 )}
             />
 
-            <Button variant="contained" color="primary" type="submit">
+            <Button disabled={formState.isSubmitting} variant="contained" color="primary" type="submit">
                 Submit
             </Button>
         </form>

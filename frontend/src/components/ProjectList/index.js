@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { Card, CardContent, Typography, Box, useMediaQuery } from "@material-ui/core"
 
-const Idea = ({ author, projectName, contactInfo, projectDescription }) => {
+const Idea = ({ author, projectName, contactInfo, projectDescription, tagsString}) => {
     const useStyles = makeStyles({
         card: {
             margin: "20px"
@@ -15,14 +15,18 @@ const Idea = ({ author, projectName, contactInfo, projectDescription }) => {
                 <Typography variant="h4" component="h1">
                     {projectName}
                 </Typography>
-                <Typography variant="p" component="p">
+                <Typography variant="subheader1" component="p">
                     By: {author}
                 </Typography>
-                <Typography variant="p" component="p">
+                <Typography variant="subheader1" component="p">
                     Contact info: {contactInfo}
                 </Typography>
-                <Typography variant="p" component="p">
+                <Typography variant="subheader1" component="p">
                     Project Description: {projectDescription}
+                </Typography>
+
+                <Typography variant="subheader1" component="p">
+                    Tags: {tagsString}
                 </Typography>
             </CardContent>
         </Card>
@@ -52,7 +56,7 @@ const Ideas = ({ list }) => {
             display="grid"
             gridTemplateColumns={getGridColumns()}
         >
-            {list && list.map((x) => <Idea {...x} />)}
+            {list && list.map((x,index) => <Idea key={index} {...x} />)}
         </Box>
     )
 }
