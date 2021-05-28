@@ -1,22 +1,20 @@
 import React from "react"
 import NavBar from "./index.js"
+import { addDecorator } from "@storybook/react";
+import { MemoryRouter } from "react-router";
 
+addDecorator(story => <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>);
 export default {
     title: "NavBar",
     component: NavBar,
-    argTypes: {
-        backgroundColor: { control: "color" }
-    }
+    argTypes: {}
 }
 
 const Template = (args) => <NavBar {...args} />
 export const Default = Template.bind({})
 Default.args = {
-    list: [
-        { idea: "hello", leaderName: "thanawat", contactInfo: "111-111-1111" },
-        { idea: "hello", leaderName: "thanawat", contactInfo: "111-111-1111" },
-        { idea: "hello", leaderName: "thanawat", contactInfo: "111-111-1111" }
-    ]
+    setDark: () => console.log("dark theme!"),
+    dark: true
 }
 
 // export const Small = Template.bind({});

@@ -1,18 +1,18 @@
 import React from "react"
-import Ideas from "./index.js"
-
+import Drawer from "./Drawer"
 export default {
-    title: "Ideas",
-    component: Ideas,
+    title: "Drawer",
+    component: Drawer,
     argTypes: {
         backgroundColor: { control: "color" }
     }
 }
 
-const Template = (args) => <Ideas {...args} />
+const Template = (args) => <Drawer {...args} />
 export const Default = Template.bind({})
 Default.args = {
-    list: Array(10).fill({ author: "thanawat", projectName: "hello", contactInfo: "111-111-1111", projectDescription: "hello" })
+    open: true,
+    setOpen: () => console.log("open drawer")
 }
 
 // export const Small = Template.bind({});
