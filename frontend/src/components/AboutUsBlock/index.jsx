@@ -1,7 +1,5 @@
 import React from 'react'
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import { findByLabelText } from '@testing-library/dom';
-import { red } from '@material-ui/core/colors';
 import { Grid, Typography, Box, useMediaQuery } from "@material-ui/core"
 import thanawat from "../../photos/thanawat.jpg"
 import kevin from "../../photos/kevin.png"

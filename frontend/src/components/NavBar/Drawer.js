@@ -44,7 +44,7 @@ export default function TemporaryDrawer({ open, setOpen, dark, setDark }) {
                             <ListItemIcon><Help/></ListItemIcon>
                             <ListItemText primary={"Help!"} />
                         </ListItem>
-                      <ListItem button onClick={() => setOpen(prev => !prev)} onClick={() => setDark(prev => !prev)}>
+                      <ListItem button onClick={() => setDark(prev => !prev)}>
                             <ListItemIcon> {dark ? <Brightness6 /> : <Brightness7 />}</ListItemIcon>
                             <ListItemText primary={`Set ${dark ? "Light" : "Dark" } Theme`} />
                         </ListItem>
