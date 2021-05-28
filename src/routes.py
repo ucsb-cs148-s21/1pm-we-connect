@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-#from .__init__ import db
+# from .__init__ import db
 from .models import formModel, tagModel, PTRelation, db
 import json
 
@@ -10,30 +10,36 @@ route = Blueprint("route", __name__)
 def getTags(n):
     allTags = db.session.query(tagModel).order_by(tagModel.count.desc()).limit(n).all()
     print(allTags[0].count)
-    return {"tags": list(map(lambda tag: {"name": tag.name, "count": tag.count} ,allTags))}
+    return {
+        "tags": list(map(lambda tag: {"name": tag.name, "count": tag.count}, allTags))
+    }
+
 
 @route.route("/search/<items>")
 def search(items):
     items = items.split("_")
     storage = {}
     for item in items:
-    	allRelations = db.session.query(PTRelation).filter(PTRelation.tagName == item).all()
-    	ids = set()
-    	for relation in allRelations:
-    		ids.add(relation.projectID)
+        allRelations = (
+            db.session.query(PTRelation).filter(PTRelation.tagName == item).all()
+        )
+        ids = set()
+        for relation in allRelations:
+            ids.add(relation.projectID)
 
-    	print(ids)
-    	allForms = db.session.query(formModel).filter(formModel.id.in_(ids)).all()
-    	#print(allForms)
-    	for form in allForms:
-    		storage[str(form.id)] = {
+        print(ids)
+        allForms = db.session.query(formModel).filter(formModel.id.in_(ids)).all()
+        # print(allForms)
+        for form in allForms:
+            storage[str(form.id)] = {
                 "author": form.author,
                 "projectName": form.projectName,
                 "contactInfo": form.contactInfo,
                 "projectDescription": form.projectDescription,
-                "tagsString": form.tagsString
+                "tagsString": form.tagsString,
             }
     return storage
+
 
 @route.route("/")
 def index():
@@ -53,7 +59,7 @@ def projects():
                 "projectName": form.projectName,
                 "contactInfo": form.contactInfo,
                 "projectDescription": form.projectDescription,
-                "tagsString": form.tagsString
+                "tagsString": form.tagsString,
             }
         return storage
 
@@ -67,7 +73,7 @@ def projects():
             projectName=item["projectName"],
             contactInfo=item["contactInfo"],
             projectDescription=item["projectDescription"],
-            tagsString=item["tags"]
+            tagsString=item["tags"],
         )
         db.session.add(form)
 
@@ -79,9 +85,9 @@ def projects():
                 tag = tagModel(name=tag_name, count=1)
                 db.session.add(tag)
             else:
-                #print(q.count)
-                q.count = q.count+1
-                #db.session.commit()
+                # print(q.count)
+                q.count = q.count + 1
+                # db.session.commit()
 
             relation = PTRelation(
                 iden=str(number) + tag_name, projectID=number, tagName=tag_name

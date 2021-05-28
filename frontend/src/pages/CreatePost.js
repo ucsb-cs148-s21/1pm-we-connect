@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PostForm from "../components/PostForm"
 import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from "@material-ui/core/styles"
-import { postProject } from "api-requests"
+import {  postProject } from "api-requests"
 
 const useStyles = makeStyles((theme) => ({
     postPage: {
