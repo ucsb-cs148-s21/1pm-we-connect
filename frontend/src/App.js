@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useMemo, useEffect } from "react"
 import NavBar from './components/NavBar';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import About from './pages/About'
@@ -10,11 +10,20 @@ import theme from "theme"
 import { CssBaseline, useMediaQuery } from '@material-ui/core';
 
 function App() {
-  const [dark, setDark] = useState(true)
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [dark, setDark] = useState(false)
+  useEffect(() => {
+    setDark(prefersDarkMode)
+  }, [prefersDarkMode])
+  const appTheme = useMemo(
+    () =>
+      theme(dark),
+    [dark],
+  );
+
   return (
-    <ThemeProvider theme={theme(prefersDarkMode && dark)}>
-      <CssBaseline/>
+    <ThemeProvider theme={appTheme}>
+      <CssBaseline />
       <Router>
         <NavBar setDark={setDark} dark={dark} />
         <Switch>
