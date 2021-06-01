@@ -10,10 +10,10 @@ import theme from "theme"
 import { CssBaseline, useMediaQuery } from '@material-ui/core';
 
 function App() {
-  const [dark, setDark] = useState(true)
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [dark, setDark] = useState(prefersDarkMode)
   return (
-    <ThemeProvider theme={theme(prefersDarkMode && dark)}>
+    <ThemeProvider theme={theme(dark)}>
       <CssBaseline/>
       <Router>
         <NavBar setDark={setDark} dark={dark} />
