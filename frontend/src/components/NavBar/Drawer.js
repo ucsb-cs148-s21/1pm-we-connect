@@ -34,7 +34,7 @@ export default function TemporaryDrawer({ open, setOpen, dark, setDark }) {
                     <List>
                         <ListItem button onClick={() => setOpen(prev => !prev)} component={Link} to="/about">
                             <ListItemIcon><Info /></ListItemIcon>
-                            <ListItemText primary={"About"} />
+                            <ListItemText primary={"Our Team"} />
                         </ListItem>
                         <ListItem button onClick={() => setOpen(prev => !prev)} component={Link} to="/createPost">
                             <ListItemIcon><Create /></ListItemIcon>

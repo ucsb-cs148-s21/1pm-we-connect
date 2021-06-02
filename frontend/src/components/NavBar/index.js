@@ -62,7 +62,7 @@ const Navbar = ({ setDark, dark }) => {
             <>
               <div>
                 <Button color="inherit" component={Link} to='createPost'>Create Post</Button>
-                <Button color="inherit" component={Link} to='about'>About</Button>
+                <Button color="inherit" component={Link} to='about'>Our Team</Button>
                 <Button color="inherit" component={Link} to='/help'>Help</Button>
                 <Tooltip title="Set Dark Theme">
                   <IconButton onClick={() => setDark(prev => !prev)}>
