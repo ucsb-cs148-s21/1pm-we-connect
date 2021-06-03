@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { Card, CardContent, Typography, Box, useMediaQuery } from "@material-ui/core"
 
@@ -38,14 +38,12 @@ const Ideas = ({ list }) => {
     const sm = useMediaQuery(theme.breakpoints.down('sm'));
     const md = useMediaQuery(theme.breakpoints.up('md'));
     const lg = useMediaQuery(theme.breakpoints.up('lg'));
-    const xl = useMediaQuery(theme.breakpoints.up('xl'));
+    // const xl = useMediaQuery(theme.breakpoints.up('xl'));
     const getGridColumns = () => {
-        if(xl)
-            return "20% 20% 20% 20% 20%"
         if(lg)
-            return "33% 33% 34"
+            return "20% 20% 20% 20% 20%"
         if(md)
-            return "50% 50%"
+            return "33% 33% 33%"
         if(sm)
             return "100%"
         return "20% 20% 20% 20% 20%"
