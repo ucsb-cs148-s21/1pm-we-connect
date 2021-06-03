@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import About from './pages/OurTeam'
-import Help from './pages/Help'
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from "theme"
 import { CssBaseline, useMediaQuery } from '@material-ui/core';
@@ -30,7 +29,6 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/createPost" exact component={CreatePost} />
           <Route path="/about" exact component={About} />
-          <Route path="/help" exact component={Help} />
         </Switch>
       </Router>
     </ThemeProvider>
