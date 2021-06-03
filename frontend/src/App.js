@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
-import About from './pages/About'
+import About from './pages/OurTeam'
 import Help from './pages/Help'
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from "theme"
