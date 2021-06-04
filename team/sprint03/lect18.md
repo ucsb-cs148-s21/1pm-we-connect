@@ -17,4 +17,5 @@ Kenneth Deng: Did nothing.
 Surendra Ghentiyala: Did nothing.
 
 # Other meeting details.
-- Worked on final minor bugs with dark theme and view size.
+- Worked on final minor bugs with dark theme and view size. 
+
