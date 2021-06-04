@@ -18,3 +18,4 @@ Surendra Ghentiyala: Did nothing.
 
 # Other meeting details.
 - Worked on final minor bugs with dark theme and view size. 
+

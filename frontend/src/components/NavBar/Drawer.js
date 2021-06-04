@@ -6,7 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Create from '@material-ui/icons/Create';
 import Info from '@material-ui/icons/Info';
-import Help from '@material-ui/icons/Help';
 import Brightness6 from "@material-ui/icons/Brightness6";
 import Brightness7 from "@material-ui/icons/Brightness7";
 import ListItemText from '@material-ui/core/ListItemText';
@@ -34,15 +33,11 @@ export default function TemporaryDrawer({ open, setOpen, dark, setDark }) {
                     <List>
                         <ListItem button onClick={() => setOpen(prev => !prev)} component={Link} to="/about">
                             <ListItemIcon><Info /></ListItemIcon>
-                            <ListItemText primary={"About"} />
+                            <ListItemText primary={"Our Team"} />
                         </ListItem>
                         <ListItem button onClick={() => setOpen(prev => !prev)} component={Link} to="/createPost">
                             <ListItemIcon><Create /></ListItemIcon>
                             <ListItemText primary={"Create Post"} />
-                        </ListItem>
-                        <ListItem button onClick={() => setOpen(prev => !prev)} component={Link} to="/help">
-                            <ListItemIcon><Help/></ListItemIcon>
-                            <ListItemText primary={"Help!"} />
                         </ListItem>
                       <ListItem button onClick={() => setDark(prev => !prev)}>
                             <ListItemIcon> {dark ? <Brightness6 /> : <Brightness7 />}</ListItemIcon>

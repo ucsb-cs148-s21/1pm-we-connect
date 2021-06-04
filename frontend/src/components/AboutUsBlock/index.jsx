@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import { Grid, Typography, Box, useMediaQuery } from "@material-ui/core"
+import { Card, CardContent, Typography, Box, useMediaQuery } from "@material-ui/core"
 import thanawat from "../../photos/thanawat.jpg"
 import kevin from "../../photos/kevin.png"
 import kenneth from "../../photos/kenneth.jpg"
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
           },
         borderRadius: "2.5%",
         height: "100%",
-        backgroundColor: "#424242",
     },
     image: {
         display: "flex",
@@ -50,9 +49,8 @@ const AboutUsBlock = ( {imageLink, name, description} ) => {
     const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
     return (
-        <Grid className={classes.root}
-            container>
-            <Grid className={classes.containerItem} container item> 
+        <Card className={classes.root}>
+            <CardContent className={classes.containerItem}> 
                 <img 
                     className={classes.image}
                     src={imageLink}
@@ -61,16 +59,16 @@ const AboutUsBlock = ( {imageLink, name, description} ) => {
                     loading="lazy"
                     alt="Avatar"
                 />
-            </Grid>
-            <Grid className={classes.containerItem} container item>
+            </CardContent>
+            <CardContent className={classes.containerItem}>
                     <Typography variant="h4" component="h1" gutterBottom>
                         {name}
                     </Typography>
                     <Typography variant="p" component="p">
                         {description}
                     </Typography>
-            </Grid>
-        </Grid>
+            </CardContent>
+        </Card>
     )
 }
 
