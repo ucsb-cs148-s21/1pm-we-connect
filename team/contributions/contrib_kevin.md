@@ -1,0 +1,11 @@
+# Kevin Hoang
+- In sprint02, pair programmed with Kenneth to create the initial routes in the backend to enable GET and POST requests.
+     - Setup basic Flask application.
+     - Created the GET and POST routes.
+     - Made a dictionary to store the data before transitioning to the database in the next sprint.
+- In sprint03, implemented the sqlite database and pair programmed with Surendra to implement the tags.
+     - Setup SQLalchemy and sqlite in the backend.
+     - Converted the dictionary to an sql database.
+     - Refactored all the code into the correct files (ex. models.py, routes.py)
+     - Worked on top k tags with Surendra.
+     - Wrote tests for the tags.
