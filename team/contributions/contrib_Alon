@@ -1,0 +1,11 @@
+# Alon
+- In sprint02, programmed the Create Post Page
+     - Created the Nav Bar for the Site that had buttons that linked to all the pages.
+     - Used React and Material UI to create a form
+     - Created several JSX components for the form that were used on later versions of the site.
+     - Edited the Video for the first MVP
+- In sprint03, worked on the team page with Kenneth.
+     - Gathered the personal anecdote of every team member
+     - Added some small features to the post form page that were overwritten. (Ex. Automatically routing to homepage after form submission, ensuring that all the input fields are filled out).
+     - Edited the video for the final demo video
+     - Wrote most of the content in the design document
