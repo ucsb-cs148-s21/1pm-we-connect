@@ -33,3 +33,8 @@ posts to fix errors.
 ## User Roles:
 - Students will be able to find study groups to find help in their classes.
 - Hobbyists will be able to create or join a team to work on projects. 
+
+## Design Doc, User Manual, and Video
+- Design Doc: https://docs.google.com/document/d/1xjggkiYmrkJT_ZrSQpd3TyFKuOv3R-ZLfCLsn_bYU7M/edit
+- Manual: https://docs.google.com/document/d/1tOo4Y3T119ZWbPOuZknJH9evW13iJ0LrPvSQUGixNJo/edit
+- Video: https://youtu.be/6V0jr2mLpnY
